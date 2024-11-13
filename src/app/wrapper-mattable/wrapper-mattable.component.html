@@ -1,0 +1,43 @@
+<div class="header-container">
+  <mat-chip-listbox aria-label="Selected Columns">
+    <mat-chip *ngFor="let chip of selectedColumns" (removed)="removeGrouping(chip)">
+      {{ chip }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-listbox>
+</div>
+
+<div cdkDropList class="table-container" (cdkDropListDropped)="drop($event)">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef> Select </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox></mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef cdkDrag> Name </th>
+      <td mat-cell *matCellDef="let element" cdkDrag>{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef cdkDrag> Age </th>
+      <td mat-cell *matCellDef="let element" cdkDrag>{{ element.age }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef cdkDrag> Department </th>
+      <td mat-cell *matCellDef="let element" cdkDrag>{{ element.department }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef cdkDrag> Role </th>
+      <td mat-cell *matCellDef="let element" cdkDrag>{{ element.role }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['select', 'name', 'age', 'department', 'role']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['select', 'name', 'age', 'department', 'role'];" cdkDrag></tr>
+  </table>
+</div>
